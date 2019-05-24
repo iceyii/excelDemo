@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/jquery-1.11.0.min.js}"></script>
+</head>
+<body>
+<form id="form">
+    导入用户<input type="file" name="file">
+    <!--<button>导出</button>-->
+    <input type="button" onclick="importUser()" value="提交">
+</form>
+<br>
+<input type="button" onclick="exportExcel()" value="导出">
+</body>
+<script th:inline="javascript">
+    var path = [[${#request.getContextPath()}]]; //获取路径
+    function importUser() {
+        var url = path + "/importExcel";
+        var formData = new FormData($("#form")[0]);
+        $.ajax({
+            //接口地址
+            url: url,
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                // if (data > 0) {
+                //     alert("导入成功");
+                // } else {
+                //     alert("导入失败");
+                // }
+            }
+            // error: function (returndata) {
+            //     alert("网络异常")
+            // }
+        });
+    }
+
+    function exportExcel() {
+        var url = path + "/exportExcel";
+        window.location.href=url;
+    }
+</script>
+</html>

@@ -1,0 +1,16 @@
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    cache: false
+    servlet:
+      content-type: text/html
+
+http:
+  multipart:
+    enabled: true
